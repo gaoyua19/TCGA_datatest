@@ -44,6 +44,3 @@ class LUADDataViewer:
     
     def sampleNumber(self):
         return self.data.shape[0]
-    
-x=LUADDataViewer('/Users/yuangao/julianne_geneexpression/data/LUAD_fpkm.csv')      
-print('test')
