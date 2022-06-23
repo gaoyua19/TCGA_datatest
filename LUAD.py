@@ -13,14 +13,14 @@ def correctLabels(df):
 def getData(df):
     data = df[~df.index.isin(range(7))].drop(['Unnamed: 0','Unnamed: 2','days_to_last_follow_up'],axis=1).copy()
     data.index = data['Unnamed: 1']
-    return np.array(data.drop('Unnamed: 1',axis=1).transpose())
+    return np.array(data.drop('Unnamed: 1',axis=1).transpose()), data.index
 
 class LUADDataViewer:
     def __init__(self,filelocation):
         df = pd.read_csv(filelocation,index_col=False)
         
         self.labels = correctLabels(df)
-        self.data = getData(df)
+        self.data,self.index = getData(df)
     
     def getLabels(self,numberofyears=5):
         values = np.array(self.labels['days_to_death'])
@@ -44,3 +44,7 @@ class LUADDataViewer:
     
     def sampleNumber(self):
         return self.data.shape[0]
+    
+    def idnames(self):
+        return self.index
+    
